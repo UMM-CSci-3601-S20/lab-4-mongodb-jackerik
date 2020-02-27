@@ -1,22 +1,22 @@
 <div fxLayout="row">
     <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
-  
+
       <mat-card class="search-card">
         <mat-card-header>
           <mat-card-title class="todo-list-title">Todos</mat-card-title>
         </mat-card-header>
         <mat-card-content fxLayout="column" >
-  
+
           <div fxLayout="row wrap" fxLayoutGap="10px">
             <!-- Examples of filtering in Angular -->
-  
+
             <mat-form-field class="input-field">
               <mat-label>Owner</mat-label>
               <input matInput id="todo-owner-input" placeholder="Filter by owner"
-              [(ngModel)]="todoOwnerName" (input)="updateFilter()">
+              [(ngModel)]="todoOwner" (input)="updateFilter()">
               <mat-hint>Filtered in Angular</mat-hint>
             </mat-form-field>
-  
+
             <mat-form-field class="input-field">
               <mat-label>Category</mat-label>
               <input matInput id="todo-category-input" placeholder="Filter by category"
@@ -24,17 +24,17 @@
               <mat-hint>Filtered in Angular</mat-hint>
             </mat-form-field>
           </div>
-          
+
           <div fxLayout="row wrap" fxLayoutGap="10px">
             <!-- Examples of filtering on the server -->
-  
+
             <mat-form-field class="input-field">
                 <mat-label>Body</mat-label>
                 <input matInput id="todo-body-input" placeholder="Filter by body"
                 [(ngModel)]="todoBody" (input)="updateFilter()">
                 <mat-hint>Filtered in Angular</mat-hint>
               </mat-form-field>
-  
+
             <mat-form-field class="input-field">
               <mat-label>Status</mat-label>
               <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" id="todo-status-select">
