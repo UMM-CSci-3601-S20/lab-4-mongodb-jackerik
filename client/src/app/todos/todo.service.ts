@@ -27,10 +27,11 @@ export class TodoService {
       if (filters.status) {
         httpParams = httpParams.set('status', filters.status.toString());
       }
-      return this.httpClient.get<Todo[]>(this.todoUrl, {
-        params: httpParams,
-      });
     }
+
+    return this.httpClient.get<Todo[]>(this.todoUrl, {
+      params: httpParams,
+    });
   }
 
 
