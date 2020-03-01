@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TodoCardComponent } from './todo-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
 
 describe('TodoCardComponent', () => {
   let component: TodoCardComponent;
@@ -8,6 +10,10 @@ describe('TodoCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        BrowserAnimationsModule,
+        MatCardModule
+      ],
       declarations: [ TodoCardComponent ]
     })
     .compileComponents();
@@ -16,6 +22,13 @@ describe('TodoCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TodoCardComponent);
     component = fixture.componentInstance;
+    component.todo = {
+      _id: 'chris_id',
+      owner: 'Chris',
+      status: true,
+      category: 'groceries',
+      body: 'chris@this.that',
+    };
     fixture.detectChanges();
   });
 

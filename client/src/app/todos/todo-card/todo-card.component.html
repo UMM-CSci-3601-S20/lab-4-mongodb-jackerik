@@ -1,1 +1,13 @@
-<p>todo-card works!</p>
+<mat-card class="todo-card" *ngIf="this.todo">
+  <mat-card-header>
+    <mat-card-title class="todo-card-name">{{ this.todo.owner }}</mat-card-title>
+    <mat-card-subtitle class="todo-card-category">{{ this.todo.category }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Status:
+      <span class="todo-card-status-complete" *ngIf="this.todo.status"> Complete </span>
+      <span class="todo-card-status-incomplete" *ngIf="!this.todo.status"> Incomplete </span>
+    </p>
+    <p>Body: <span class="todo-card-body">{{ this.todo.body }}</span></p>
+  </mat-card-content>
+</mat-card>
