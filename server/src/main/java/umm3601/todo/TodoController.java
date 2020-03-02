@@ -48,6 +48,10 @@ public class TodoController {
       filters.add(eq("category", ctx.queryParam("category")));
     }
 
+    if (ctx.queryParamMap().containsKey("body")) {
+      filters.add(eq("body", ctx.queryParam("body")));
+    }
+
     ctx.json(todoCollection.find(filters.isEmpty() ? new Document() : and(filters))
     .into(new ArrayList<>()));
 
