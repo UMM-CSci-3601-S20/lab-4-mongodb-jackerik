@@ -52,8 +52,20 @@ public class TodoController {
       filters.add(eq("body", ctx.queryParam("body")));
     }
 
+    if (ctx.queryParamMap().containsKey("status")) {
+      filters.add(eq("status", convertStatus(ctx.queryParam("status"))));
+    }
+
     ctx.json(todoCollection.find(filters.isEmpty() ? new Document() : and(filters))
     .into(new ArrayList<>()));
 
+  }
+
+  private boolean convertStatus(String todoStatus) {
+    if(todoStatus.equals("complete")) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
