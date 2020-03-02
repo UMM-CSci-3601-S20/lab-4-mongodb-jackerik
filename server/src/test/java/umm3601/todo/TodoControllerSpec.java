@@ -146,4 +146,17 @@ public class TodoControllerSpec {
     }
   }
 
+  @Test
+  public void GetTodosByBody() throws IOException {
+
+    mockReq.setQueryString("body=jamie@frogs.com");
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/todos");
+    todoController.getTodos(ctx);
+
+    assertEquals(200, mockRes.getStatus());
+    String result = ctx.resultString();
+    for (Todo todo : JavalinJson.fromJson(result, Todo[].class)) {
+      assertEquals("jamie@frogs.com", todo.body);
+    }
+  }
 }
