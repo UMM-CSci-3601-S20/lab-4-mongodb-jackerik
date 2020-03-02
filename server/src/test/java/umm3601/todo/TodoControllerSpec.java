@@ -170,7 +170,22 @@ public class TodoControllerSpec {
     assertEquals(200, mockRes.getStatus());
     String result = ctx.resultString();
     for (Todo todo : JavalinJson.fromJson(result, Todo[].class)) {
-      assertEquals("incomplete", todo.body);
+      assertEquals("incomplete", todo.status);
+    }
+  }
+
+  @Test
+  public void GetTodosByStatusAndOwner() throws IOException {
+
+    mockReq.setQueryString("status=incomplete&owner=chris");
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/todos");
+    todoController.getTodos(ctx);
+
+    assertEquals(200, mockRes.getStatus());
+    String result = ctx.resultString();
+    for (Todo todo : JavalinJson.fromJson(result, Todo[].class)) {
+      assertEquals("incomplete", todo.status);
+      assertEquals("Chris", todo.owner);
     }
   }
 }
