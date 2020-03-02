@@ -1,6 +1,7 @@
 package umm3601.todo;
 
 import static com.mongodb.client.model.Filters.and;
+import static com.mongodb.client.model.Filters.eq;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,10 @@ public class TodoController {
   public void getTodos(Context ctx) {
 
     List<Bson> filters = new ArrayList<Bson>();
+
+    if (ctx.queryParamMap().containsKey("owner")) {
+      filters.add(eq("owner", ctx.queryParam("owner")));
+    }
 
     ctx.json(todoCollection.find(filters.isEmpty() ? new Document() : and(filters))
     .into(new ArrayList<>()));
