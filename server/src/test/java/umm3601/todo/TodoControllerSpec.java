@@ -117,4 +117,18 @@ public class TodoControllerSpec {
     String result = ctx.resultString();
     assertEquals(db.getCollection("todos").countDocuments(), JavalinJson.fromJson(result, Todo[].class).length);
   }
+
+  @Test
+  public void GetTodosByOwner() throws IOException {
+
+    mockReq.setQueryString("owner=Chris");
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/todos");
+    todoController.getTodos(ctx);
+
+    assertEquals(200, mockRes.getStatus());
+    String result = ctx.resultString();
+    for (Todo todo : JavalinJson.fromJson(result, Todo[].class)) {
+      assertEquals("Chris", todo.owner);
+    }
+  }
 }
