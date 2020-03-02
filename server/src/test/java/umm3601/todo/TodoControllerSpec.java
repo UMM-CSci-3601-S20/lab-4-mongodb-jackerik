@@ -131,4 +131,19 @@ public class TodoControllerSpec {
       assertEquals("Chris", todo.owner);
     }
   }
+
+  @Test
+  public void GetTodosByCategory() throws IOException {
+
+    mockReq.setQueryString("category=videogames");
+    Context ctx = ContextUtil.init(mockReq, mockRes, "api/todos");
+    todoController.getTodos(ctx);
+
+    assertEquals(200, mockRes.getStatus());
+    String result = ctx.resultString();
+    for (Todo todo : JavalinJson.fromJson(result, Todo[].class)) {
+      assertEquals("videogames", todo.owner);
+    }
+  }
+
 }
