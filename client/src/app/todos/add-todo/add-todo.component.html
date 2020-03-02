@@ -43,7 +43,7 @@
 
           <mat-form-field>
             <mat-label>Body</mat-label>
-            <input matInput #input id="body" type="string" placeholder="Body" formControlName="body" required>
+            <input matInput #input id="bodyField" type="string" placeholder="Body" formControlName="body" required>
             <mat-error *ngFor="let validation of add_todo_validation_messages.body">
               <mat-error class="error-message" id='body-error'
                 *ngIf="addTodoForm.get('body').hasError(validation.type) && (addTodoForm.get('body').dirty || addTodoForm.get('body').touched)">
