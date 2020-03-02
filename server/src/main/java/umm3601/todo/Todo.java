@@ -4,10 +4,14 @@ import org.mongojack.Id;
 import org.mongojack.ObjectId;
 
 public class Todo {
+
   @ObjectId @Id
   public String _id;
+
   public String owner;
-  public String category;
   public String body;
-  public Boolean status;
+  public String category;
+  public boolean status;
+
+
 }

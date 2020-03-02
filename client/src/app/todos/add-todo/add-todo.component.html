@@ -32,9 +32,8 @@
           <mat-form-field>
             <mat-label>Status</mat-label>
             <mat-select id="statusField" required formControlName="status">
-              <mat-option value="Complete">Admin</mat-option>
-              <mat-option value="Incomplete">Editor</mat-option>
-              \
+              <mat-option value="complete">Complete</mat-option>
+              <mat-option value="incomplete">Incomplete</mat-option>
             </mat-select>
             <mat-error *ngIf="addTodoForm.get('status').hasError('required')">You must make a selection</mat-error>
             <mat-error *ngIf="addTodoForm.get('status').hasError('pattern') && !addTodoForm.get('status').hasError('required')">
@@ -47,7 +46,7 @@
             <input matInput #input id="body" type="string" placeholder="Body" formControlName="body" required>
             <mat-error *ngFor="let validation of add_todo_validation_messages.body">
               <mat-error class="error-message" id='body-error'
-                *ngIf="addUserForm.get('email').hasError(validation.type) && (addUserForm.get('email').dirty || addUserForm.get('email').touched)">
+                *ngIf="addTodoForm.get('body').hasError(validation.type) && (addTodoForm.get('body').dirty || addTodoForm.get('body').touched)">
                 {{validation.message}}
               </mat-error>
             </mat-error>
