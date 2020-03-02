@@ -142,7 +142,7 @@ public class TodoControllerSpec {
     assertEquals(200, mockRes.getStatus());
     String result = ctx.resultString();
     for (Todo todo : JavalinJson.fromJson(result, Todo[].class)) {
-      assertEquals("videogames", todo.owner);
+      assertEquals("videogames", todo.category);
     }
   }
 
