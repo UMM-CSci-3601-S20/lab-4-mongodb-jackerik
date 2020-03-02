@@ -5,8 +5,14 @@ import static com.mongodb.client.model.Filters.eq;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.mongojack.JacksonCodecRegistry;
+
+import com.google.common.collect.ImmutableMap;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -59,6 +65,20 @@ public class TodoController {
     ctx.json(todoCollection.find(filters.isEmpty() ? new Document() : and(filters))
     .into(new ArrayList<>()));
 
+  }
+
+  public void addNewTodo(Context ctx) {
+    System.err.println("Got here");
+    Todo newTodo = ctx.bodyValidator(Todo.class)
+      .check((todo) -> todo.owner != null && todo.owner.length() > 0)
+      .check((todo) -> todo.category != null && todo.category.length() > 0)
+      .check((todo) -> todo.body != null && todo.body.length() > 0)
+      .check((todo) -> todo.statusAsString().matches("^(complete|incomplete)$"))
+      .get();
+
+    todoCollection.insertOne(newTodo);
+    ctx.status(201);
+    ctx.json(ImmutableMap.of("id", newTodo._id));
   }
 
   private boolean convertStatus(String todoStatus) {

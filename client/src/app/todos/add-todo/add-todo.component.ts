@@ -81,7 +81,6 @@ export class AddTodoComponent implements OnInit {
         Validators.pattern('^(complete|incomplete)$'),
       ])),
     });
-    console.log(this.addTodoForm.get('owner'));
   }
 
   ngOnInit() {
@@ -90,11 +89,18 @@ export class AddTodoComponent implements OnInit {
 
 
   submitForm() {
+    let statusBool;
+    if (this.addTodoForm.value.status === 'complete') {
+      statusBool = true;
+    } else {
+      statusBool = false;
+    }
+    this.addTodoForm.value.status = statusBool;
     this.todoService.addTodo(this.addTodoForm.value).subscribe(newID => {
       this.snackBar.open('Added Todo ' + this.addTodoForm.value.owner, null, {
         duration: 2000,
       });
-      this.router.navigate(['/todo/']);
+      this.router.navigate(['/todos/']);
     }, err => {
       this.snackBar.open('Failed to add the todo', null, {
         duration: 2000,
